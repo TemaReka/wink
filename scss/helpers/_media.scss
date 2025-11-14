@@ -1,0 +1,85 @@
+// ===================
+// Миксины для медиа-запросов и hover-эффектов
+// ===================
+//
+// Как пользоваться этим кодом?
+//
+// 1. Импортируйте данный модуль SCSS (он уже импортируется через _utils.scss и _index.scss):
+//    @use 'helpers' as *;
+//
+// 2. Используйте медиамиксины для применения стилей при определённой ширине экрана:
+// 
+//    @include laptop { ... }     // <= 1296.98px
+//    @include middle { ... }     // <= 923.98px
+//    @include middleSm { ... }   // <= 800.98px
+//    @include sm { ... }         // <= 640.98px
+//
+//    Пример:
+//    .my-class {
+//      color: red;
+//
+//      @include sm {
+//        color: blue;
+//      }
+//    }
+//
+// 3. Используйте миксин hover для кроссплатформенных hover/active-эффектов:
+// 
+//    .button {
+//      @include hover {
+//        background: #eee;
+//      }
+//    }
+//
+//    По умолчанию, на устройствах без hover (например, мобильные)
+//    применится эффект при :active. Если не нужно — передайте false:
+//    @include hover(false) { ... }
+//
+// ===================
+
+@use 'functions' as *;
+
+$laptop: 1296.98;
+$middle: 923.98;
+$middleSm: 800.98;
+$sm: 640.98;
+
+@mixin laptop {
+    @media (width <= rem($laptop)) {
+        @content;
+    }
+}
+
+@mixin middle {
+    @media (width <= rem($middle)) {
+        @content;
+    }
+}
+
+@mixin middleSm {
+    @media (width <= rem($middleSm)) {
+        @content;
+    }
+}
+
+@mixin sm {
+    @media (width <= rem($sm)) {
+        @content;
+    }
+}
+
+@mixin hover($hasActiveEffectOnMobile: true) {
+    @media (any-hover: hover) {
+        &:hover {
+            @content;
+        }
+    }
+
+    @if ($hasActiveEffectOnMobile) {
+        @media (any-hover: none) {
+            &:active {
+                @content;
+            }
+        }
+    }
+}

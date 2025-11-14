@@ -1,0 +1,80 @@
+@use '../helpers/index' as *;
+
+.upload_container {
+    padding: 20px;
+    height: 100vh; // Фиксированная высота viewport
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.upload {
+    width: 100%;
+    flex: 1; // Занимает всю доступную высоту
+    position: relative;
+    min-height: 0;
+    margin-bottom: 0 !important; // Убираем margin-bottom от section
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+
+    border-radius: 40px;
+    
+    // Текст черный по умолчанию
+    color: #000;
+    transition: color 0.3s ease;
+
+    // При ховере текст становится синим
+    @include hover {
+        color: oklch(var(--blue));
+        transition: color 0s;
+    }
+
+    // Фон через отдельный псевдоэлемент
+    // clip-path обрезает фон по скругленным углам
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 40px;
+        clip-path: inset(0 round 40px); // Обрезаем фон по скругленным углам
+        z-index: 0;
+        cursor: pointer;
+        
+        // Фон по умолчанию прозрачный, при уходе мыши плавно возвращается за 0.5s
+        background-color: transparent;
+        transition: background-color 0.5s ease;
+    }
+
+    // При наведении фон меняется моментально
+    @include hover {
+        &::after {
+            background-color: oklch(var(--blue) / 0.1);
+            transition: background-color 0s;
+        }
+    }
+
+    // Контент должен быть поверх псевдоэлементов
+    > * {
+        position: relative;
+        z-index: 2;
+    }
+
+    // Обводка через SVG с пунктирной линией
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+
+        // Используем переменную --blue (OKLCH: 0.6435 0.1955 253.06 ≈ #6469F5)
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cdefs%3E%3Cstyle%3E.path%7Bfill:none;stroke:%236469F5;stroke-width:2;stroke-dasharray:30 30;%7D%3C/style%3E%3C/defs%3E%3Crect class='path' x='1' y='1' width='calc(100%25 - 2px)' height='calc(100%25 - 2px)' rx='40'/%3E%3C/svg%3E");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}

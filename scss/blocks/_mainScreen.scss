@@ -1,0 +1,336 @@
+.scenario_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin-bottom: 0 !important;
+
+    flex: 1;
+
+    padding: 50px 36px 48px 36px;
+    width: 33.33%;
+    position: sticky;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    height: 100vh;
+
+    box-shadow: 37px 59px 28px rgba(0, 0, 0, 0.01);
+    box-shadow: 21px 33px 23px rgba(0, 0, 0, 0.03);
+    box-shadow: 9px 15px 17px rgba(0, 0, 0, 0.05);
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.06);
+
+    p {
+            // Переносы слов с вендорными префиксами
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    height: 100%;
+    margin-bottom: 0;
+    padding-bottom: 48px;
+
+    // Дополнительные свойства для лучшей работы переносов
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow: scroll;
+
+
+    font-size: 16px;
+    line-height: 1.5;
+    text-wrap: balance;
+    // text-align: justify;
+
+        overflow-y: scroll; /* или auto */
+    
+    /* Для Chrome / Edge / Safari */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE 10+ */
+
+    }
+}
+
+.scenario_container {
+    display: flex;
+}
+
+.scenario_controls {
+    padding-top: 18px;
+    display: flex;
+    width: 100%;
+    gap: 18px;
+    flex-wrap: wrap;
+    // border-top: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        height: 80px; /* высота затемнения */
+        pointer-events: none; /* чтобы не мешал скроллу */
+
+        background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 1) 100%
+        );  
+    }
+}
+
+
+/* Левая градиентная кнопка */
+.check_button {
+    position: relative;
+    cursor: pointer;
+
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+
+    padding: 14px 32px;
+    border: none;
+    border-radius: 0;
+    overflow: hidden;
+
+    /* фон самой кнопки прозрачный, всё рисуем в ::before */
+    background: transparent;
+}
+
+/* Градиент лежит ПОД текстом */
+.check_button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;              /* ниже текста */
+
+    /* твой базовый ОРАНЖЕВЫЙ градиент */
+    background: linear-gradient(
+        63.55deg,
+        #ff9532 -10.89%,
+        #ff8a1c 9.96%,
+        #ff5b21 51.66%,
+        #ff5a24 86%
+    );
+
+    /* плавное ВОЗВРАЩЕНИЕ */
+    transition: background 0.5s ease;
+}
+
+/* при наведении — тот же градиент, но краснее, БЕЗ анимации */
+.check_button:hover::before {
+    background: linear-gradient(
+        63.55deg,
+        #ff6a2e -10.89%,
+        #ff4a1c 9.96%,
+        #ff231f 51.66%,
+        #e00000 86%
+    );
+    transition: none; /* моментальное краснение */
+}
+
+
+/* Правая часть со ссылками */
+.scenario_download_links {
+    display: flex;
+    gap: 12px;
+    font-size: 16px;
+    align-items: center;
+}
+
+/* Ссылки */
+.scenario_download_links a {
+    color: #0047ff;
+    text-decoration: none;
+}
+
+/* Точка между ссылками */
+.dot {
+    color: #0047ff;
+}
+
+.scenario_analysis {
+    padding: 50px 50px 0px 64px;
+    flex: 2;
+    overflow: scroll;
+
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE/Edge старый */
+}
+
+.result_summary {
+    font-size: 20px;
+    background: #F7F7F7;
+    padding: 20px 20px 0px 20px;
+    display: flex;
+    margin-top: 36px;
+    gap: 18px;
+}
+
+.result_subtitle {
+    font-weight: 800;
+    font-family: "Inter";
+
+}
+
+.result_details {
+    display: flex;
+    align-content: space-between;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.score {
+    font-family: "PT Root UI";
+    font-size: 200px;
+    font-weight: 100;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.1em;
+    line-height: 1;
+    display: inline-block;
+    transform: translateX(-4%);
+    clip-path: inset(12% -5px 14% 0%);
+}
+
+.themes_links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: baseline;
+}
+
+.link-box {
+    padding: 2px 6px 4px 6px;
+    background: rgba(167, 167, 167, 0.15);
+    color: black;
+    width: fit-content;
+    flex: none !important;
+}
+
+.themes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.severity {
+    padding-bottom: 1.7vw;
+    margin-top: 32px;
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+}
+
+.red_box {
+    background: rgba(var(--red), 0.12);            /* нежно-красный фон */
+    padding: 2px 3px;               /* небольшие внутренние отступы */
+    box-decoration-break: clone;    /* важное свойство */
+    -webkit-box-decoration-break: clone; /* поддержка Safari */
+    width: fit-content;
+}
+
+.red {
+    color: rgb(var(--red));
+}
+
+.ginger {
+    color: rgb(var(--ginger));
+}
+
+.yellow {
+    color: rgb(var(--yellow));
+}
+
+.green {
+    color: rgb(var(--green));
+}
+
+.sub_total {
+        font-family: "PT Root UI";
+    font-size: 70px;
+    font-weight: 100;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    display: inline-block;
+    transform: translateX(-4%);
+    clip-path: inset(12% -5px 14% 0%);
+    margin-bottom: 0px;
+}
+
+
+.result_overview {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+
+    p {
+        text-wrap: balance;
+    }
+}
+
+.details {
+    margin-top: 48px;
+}
+
+.moment-card {
+    position: relative;
+    max-width: 600px;
+    background: #f3f3f3;       /* светло-серый фон как в макете */
+    border-radius: 6px;
+
+    padding: 16px 16px 24px 16px;
+    font-family: system-ui, -apple-system, "Inter", sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 16px;
+}
+
+/* Кнопка закрытия (крестик) */
+.moment-card__close {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 4px 12px 12px 12px;
+    
+    transition: color 0.5s ease;
+    background: transparent;
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+
+    &:hover {
+        color: oklch(var(--hover-link-color));
+        transition: color 0s;
+    }
+}
+
+/* Заголовок "12 страница" */
+.moment-card__page {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: -4px; /* точное визуальное выравнивание */
+}
+
+/* Основная цитата */
+.moment-card__quote {
+    font-size: 18px;
+    line-height: 1.35;
+}
+
+.moment-card__fix-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 14px;
+    margin-bottom: 0;
+}
+
+.moment-card__fix-text {
+    font-size: 18px;
+    line-height: 1.35;
+    padding-right: 24px; 
+}

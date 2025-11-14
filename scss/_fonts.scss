@@ -1,0 +1,31 @@
+// Вариативный шрифт PT Root UI
+@font-face {
+    font-family: 'PTRootUI';
+    src: url('../fonts/PT-Root-UI_VF.woff2') format('woff2 supports variations'),
+         url('../fonts/PT-Root-UI_VF.woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+// Вариативный шрифт Inter (обычный)
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-VariableFont_opsz,wght.woff2') format('woff2 supports variations'),
+         url('../fonts/Inter-VariableFont_opsz,wght.woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-style: normal;
+    font-optical-sizing: auto;
+    font-display: swap;
+}
+
+// Вариативный шрифт Inter (курсив)
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-Italic-VariableFont_opsz,wght.woff2') format('woff2 supports variations'),
+         url('../fonts/Inter-Italic-VariableFont_opsz,wght.woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-style: italic;
+    font-optical-sizing: auto;
+    font-display: swap;
+}
